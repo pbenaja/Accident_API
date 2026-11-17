@@ -3,6 +3,8 @@
 public class Accident
 {
 	private int id;
+    private static int nombreAccident=0
+    private Guid personneId;
     private string description;
     private string lieu;
     public enum Type
@@ -21,12 +23,23 @@ public class Accident
 	{
 	}
 
-    public Accident(int id, string description, string lieu, DateTime date, Type type, Gravite gravite)
+    public Accident( string description, string lieu, DateTime date, Type type, Gravite gravite)
     {
+        nombreAccident++;
         this.date = date;
         this.description = description;
         this.lieu = lieu;
 		this.type = type;
         this.gravite = gravite;
+        InitialiserId();
+    }
+
+    private void InitialiserId()
+    {
+        this.id = nombreAccident;
+    }
+    public void InitialiserPersonneId(Guid personneId)
+    {
+        this.personneId = personneId;
     }
 }
