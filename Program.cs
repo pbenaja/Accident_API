@@ -1,4 +1,8 @@
 
+using AccidentAPI.services;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace IncidentAPI
 {
     public class Program
@@ -9,10 +13,15 @@ namespace IncidentAPI
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<IAccidentService, AccidentService>();
+
 
             var app = builder.Build();
 

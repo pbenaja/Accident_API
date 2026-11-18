@@ -1,14 +1,18 @@
-﻿using System;
+﻿using AccidentAPI.services;
+using System;
 
-public class AccidentService
+public class AccidentService:IAccidentService
 {
-	List<Accident> accidents;
-	public Creer(Accident accident, Personne p)
-	{
-		
-	}
-	public AccidentService()
-	{
-		accidents=new List<Accident> ();
-	}
+    private readonly List<Accident> accidents = new List<Accident>();
+
+    public Accident Enregistrer(Accident accident)
+    {
+        accidents.Add(accident);
+        return accident;
+    }
+
+    public IEnumerable<Accident> GetAll()
+    {
+        return accidents;
+    }
 }
